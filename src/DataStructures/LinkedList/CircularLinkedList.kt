@@ -1,4 +1,6 @@
-package DataStructure.LinkedList
+package LinkedList
+import util.defaultEquals
+import models.Node
 
 class CircularLinkedList<T> (equalsFn: (T, T) -> Boolean = ::defaultEquals) : LinkedList<T>(equalsFn) {
 

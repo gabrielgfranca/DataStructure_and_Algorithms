@@ -1,4 +1,4 @@
-package DataStructure.LinkedList
+package LinkedList
 
 class StackLinkedList<T> {
     private val items = DoublyLinkedList<T>()

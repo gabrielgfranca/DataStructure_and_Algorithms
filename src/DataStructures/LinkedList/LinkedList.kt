@@ -1,9 +1,7 @@
-package DataStructure.LinkedList
+package LinkedList
+import util.defaultEquals
+import models.Node
 
-fun <T> defaultEquals(a: T, b: T): Boolean = a == b
-open class Node<T>(val element: T) {
-    var next: Node<T>? = null
-}
 
 open class LinkedList<T>(val equalsFn: (T, T) -> Boolean = ::defaultEquals) {
     protected var count: Int = 0
@@ -82,7 +80,7 @@ open class LinkedList<T>(val equalsFn: (T, T) -> Boolean = ::defaultEquals) {
     }
     fun isEmpty(): Boolean = size() == 0
     fun size(): Int = count
-    open fun getHead(): Node<T>? = head
+    //open fun getHead(): Node<T>? = head
     open fun clear() {
         head = null
         count = 0

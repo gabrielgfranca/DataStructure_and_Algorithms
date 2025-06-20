@@ -1,4 +1,4 @@
-package DataStructure.LinkedList
+package LinkedList
 import java.util.LinkedList
 
 fun main() {
@@ -9,7 +9,7 @@ fun main() {
 // Native LinkedLists in Kotlin are doubly linked lists
 ////////////////////////////////////////////////////////
 fun nativeLinkedList() {
-    val linkedList = LinkedList<Int>() // creates an empty LinkedList
+    val linkedList = LinkedList<Int>() // creates an empty DataStructure.DataStructure.LinkedList.Set.LinkedList
 
     linkedList.add(13) // add the element to the end of the list
     linkedList.add(0, 23) // add element at specified position 0

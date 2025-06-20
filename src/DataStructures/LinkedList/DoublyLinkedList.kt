@@ -1,4 +1,6 @@
-package DataStructure.LinkedList
+package LinkedList
+import util.defaultEquals
+import models.Node
 
 class DoublyLinkedList<T>(equalsFn: (T, T) -> Boolean = ::defaultEquals) : LinkedList<T>(equalsFn) {
     class DoublyNode<T>(element: T) : Node<T>(element) { var previous: DoublyNode<T>? = null }
@@ -80,7 +82,7 @@ class DoublyLinkedList<T>(equalsFn: (T, T) -> Boolean = ::defaultEquals) : Linke
         }
         return -1
     }
-    override fun getHead(): DoublyNode<T>? = head as? DoublyNode<T>
+    //override fun getHead(): DoublyNode<T>? = head as? DoublyNode<T>
     fun getTail(): DoublyNode<T>? = tail
     override fun clear() {
         super.clear()

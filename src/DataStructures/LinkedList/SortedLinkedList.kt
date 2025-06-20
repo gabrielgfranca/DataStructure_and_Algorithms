@@ -1,4 +1,5 @@
-package DataStructure.LinkedList
+package LinkedList
+import util.defaultEquals
 
 object Compare {
     const val LESS_THAN = -1
