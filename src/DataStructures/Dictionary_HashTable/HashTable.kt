@@ -5,29 +5,29 @@ import util.defaultToString
 class HashTable<K, V>(private val toStrFn: (K?) -> String = ::defaultToString) {
     private val table = mutableMapOf<Int, ValuePair<K, V>>()
 
-    fun hashCode(key: K): Int {
-        if (key is Number) return key.toInt()
+    fun djb2Hash(key: K): Int {
         val tableKey = toStrFn(key)
-        var hash = 0
-        for (char in tableKey)
-            hash += char.code
-        return hash % 37
+        var hash = 5381L
+        for (char in tableKey) {
+            hash = ((hash shl 5) + char.code)
+        }
+        return (hash and 0xffffffff).toInt()
     }
     fun put(key: K, value: V): Boolean {
         if (key != null && value != null) {
-            val position = hashCode(key)
+            val position = djb2Hash(key)
             table[position] = ValuePair(key, value)
             return true
         }
         return false
     }
     fun get(key: K): V? {
-        val valuePair = table[hashCode(key)]
+        val valuePair = table[djb2Hash(key)]
         return valuePair?.value
     }
     fun remove(key: K): Boolean {
-        val hash = hashCode(key)
-        val valuePair = table[hashCode(key)]
+        val hash = djb2Hash(key)
+        val valuePair = table[djb2Hash(key)]
         if (valuePair != null) {
             table.remove(hash)
             return true

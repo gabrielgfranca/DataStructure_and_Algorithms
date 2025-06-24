@@ -80,7 +80,7 @@ open class LinkedList<T>(val equalsFn: (T, T) -> Boolean = ::defaultEquals) {
     }
     fun isEmpty(): Boolean = size() == 0
     fun size(): Int = count
-    //open fun getHead(): Node<T>? = head
+    open fun getHead(): Node<T>? = head
     open fun clear() {
         head = null
         count = 0
