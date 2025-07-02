@@ -1,5 +1,4 @@
 package DataStructures.Dictionary_HashTable
-import LinkedList.LinkedList
 import models.ValuePair
 import util.defaultToString
 
@@ -75,11 +74,8 @@ class HashTableLinearProbing<K, V>(private val toStrFn: (K?) -> String = ::defau
     fun getTable(): Map<Int, ValuePair<K, V>> = table
     override fun toString(): String {
         if (isEmpty()) return "[]"
-        val keys = table.keys.toList()
-        var objString = "{${keys[0]} => ${table[keys[0]].toString()}}"
-        for (i in 1 until keys.size) {
-            objString += ",{${keys[i]} => ${table[keys[i]].toString()}}"
-        }
-        return objString
+        val entries = table.entries
+            .map { (key, value) -> "$key: $value" }
+        return entries.joinToString(", ", prefix = "[", postfix = "]")
     }
 }
