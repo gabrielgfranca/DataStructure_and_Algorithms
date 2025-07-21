@@ -12,7 +12,7 @@ typedef struct {
 Set *createSet();
 void clearSet(Set *set);
 bool add(Set *set, int element);
-bool delete(Set *set, int element);
+bool remove(Set *set, int value);
 bool has(Set *set, int element);
 Set *unionSet(Set *set1, Set *set2);
 Set *intersectionSet(Set *set1, Set *set2);
