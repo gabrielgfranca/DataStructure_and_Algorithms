@@ -10,6 +10,7 @@
 - A BST allows efficient operations such as search, insertion, and deletion.
 */
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -64,5 +65,32 @@ void postOrderTraversal(Node* node) {
     postOrderTraversal(node->left);
     postOrderTraversal(node->right);
     printf("%d ", node->key);
+  }
+}
+
+Node* minNode(Node* node) {
+  Node* current = node;
+  while (current != NULL && current->left != NULL) {
+    current = current->left;
+  }
+  return current;
+}
+
+Node* maxNode(Node* node) {
+  Node* current = node;
+  while (current != NULL && current->right != NULL) {
+    current = current->right;
+  }
+  return current;
+}
+
+bool searchNode(Node* node, int key) {
+  if (node == NULL) return false;
+  if (key == node->key) return true;
+
+  if (key < node->key) {
+    return searchNode(node->left, key);
+  } else {
+    return searchNode(node->right, key);
   }
 }
