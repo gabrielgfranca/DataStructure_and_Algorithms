@@ -19,10 +19,6 @@ typedef struct Node {
   struct Node* right;
 } Node;
 
-typedef struct BinarySearchTree {
-  Node* root;
-} BinarySearchTree;
-
 Node* createNode(int key) {
   Node* newNode = (Node*)malloc(sizeof(Node));
   if (newNode == NULL) {
@@ -35,30 +31,38 @@ Node* createNode(int key) {
   return newNode;
 }
 
-void initTree(BinarySearchTree* tree) { tree->root = NULL; }
-
-void insertNode(Node* current, int key) {
-  if (key < current->key) {
-    if (current->left == NULL) {
-      current->left = createNode(key);
-    } else {
-      insertNode(current->left, key);
-    }
+Node* insertNode(Node* node, int key) {
+  if (node == NULL) return createNode(key);
+  if (key < node->key) {
+    node->left = insertNode(node->left, key);
   } else {
-    if (current->right == NULL) {
-      current->right = createNode(key);
-    } else {
-      insertNode(current->right, key);
-    }
+    node->right = insertNode(node->right, key);
+  }
+  return node;
+}
+
+Node* getRoot(Node* root) { return root; }
+
+void inOrderTraversal(Node* node) {
+  if (node != NULL) {
+    inOrderTraversal(node->left);
+    printf("%d ", node->key);
+    inOrderTraversal(node->right);
   }
 }
 
-void insert(BinarySearchTree* tree, int key) {
-  if (tree->root == NULL) {
-    tree->root = createNode(key);
-  } else {
-    insertNode(tree->root, key);
+void preOrderTraversal(Node* node) {
+  if (node != NULL) {
+    printf("%d ", node->key);
+    preOrderTraversal(node->left);
+    preOrderTraversal(node->right);
   }
 }
 
-Node* getRoot(BinarySearchTree* tree) { return tree->root; }
+void postOrderTraversal(Node* node) {
+  if (node != NULL) {
+    postOrderTraversal(node->left);
+    postOrderTraversal(node->right);
+    printf("%d ", node->key);
+  }
+}
