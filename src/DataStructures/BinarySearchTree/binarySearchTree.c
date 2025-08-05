@@ -42,8 +42,6 @@ Node* insertNode(Node* node, int key) {
   return node;
 }
 
-Node* getRoot(Node* root) { return root; }
-
 void inOrderTraversal(Node* node) {
   if (node != NULL) {
     inOrderTraversal(node->left);
@@ -92,5 +90,50 @@ bool searchNode(Node* node, int key) {
     return searchNode(node->left, key);
   } else {
     return searchNode(node->right, key);
+  }
+}
+
+Node* removeNode(Node* root, int key) {
+  if (root == NULL) return NULL;
+
+  if (key < root->key) {
+    root->left = removeNode(root->left, key);
+    return root;
+  } else if (key > root->key) {
+    root->right = removeNode(root->right, key);
+    return root;
+  }
+
+  // handle 3 special conditions
+  // 1 - a leaf node
+  // 2 - a node with only 1 child
+  // 3 - a node with 2 children
+  // case 1
+  if (root->left == NULL && root->right == NULL) {
+    free(root);
+    return NULL;
+  }
+  // Case 2
+  if (root->left == NULL) {
+    Node* temp = root->right;
+    free(root);
+    return temp;
+  } else if (root->right == NULL) {
+    Node* temp = root->left;
+    free(root);
+    return temp;
+  }
+  // Case 3
+  Node* minRight = minNode(root->right);
+  root->key = minRight->key;
+  root->right = removeNode(root->right, minRight->key);
+  return root;
+}
+
+void freeTree(Node* node) {
+  if (node != NULL) {
+    freeTree(node->left);
+    freeTree(node->right);
+    free(node);
   }
 }
